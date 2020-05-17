@@ -16,20 +16,19 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class GraphDraw extends JFrame {
+public class GraphDraw extends JPanel {
 
     public int width;
     public int height;
     public int frameHeight;
     public int frameWidth;
     
-    public  boolean result = false;
 
     ArrayList<Node> nodes;
     ArrayList<edge> edges;
 
     public GraphDraw() { //Constructor
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         nodes = new ArrayList<Node>();
         edges = new ArrayList<edge>();
         width = 50;
@@ -37,8 +36,8 @@ public class GraphDraw extends JFrame {
     }
 
     public GraphDraw(String name, int frameHeight, int frameWidth) { //Construct with label
-        this.setTitle(name);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setTitle(name);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frameHeight = frameHeight;
         this.frameWidth = frameWidth;
         nodes = new ArrayList<Node>();
@@ -74,13 +73,13 @@ public class GraphDraw extends JFrame {
     public void addNode(String name, int x, int y) {
         //add a node at pixel (x,y)
         nodes.add(new Node(name, x, y));
-        //this.repaint();
+        this.repaint();
     }
 
     public void addEdge(int i, int j, int x, int y) {
         //add an edge between nodes i and j
         edges.add(new edge(i, j, x, y));
-        //this.repaint();
+        this.repaint();
     }
 
     public void paint(Graphics g) { // draw the nodes and edges
@@ -134,10 +133,12 @@ public class GraphDraw extends JFrame {
                         edgeStartCordinantY = 10;
                     } else {
                         edgeStartCordinantX = -10;
-                        edgeStartCordinantX = -10;
+                        edgeStartCordinantY = -10;
                     }
                     frame.addEdge(i, j, edgeStartCordinantX, edgeStartCordinantY);
                 }
+                edgeStartCordinantX = 0;
+                edgeStartCordinantY = 0;
             }
             if (i != 0) {
                 if (i % 2 == 0) {
@@ -154,8 +155,6 @@ public class GraphDraw extends JFrame {
             frame.addNode(String.valueOf(i), x, y);
 
         }
-            this.repaint();
-            result = true;
     }
 }
 

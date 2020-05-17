@@ -32,6 +32,7 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         drawGraph = new javax.swing.JButton();
+        result = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,13 +43,20 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        result.setText("Result:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addComponent(drawGraph)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(drawGraph))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -56,7 +64,9 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addComponent(drawGraph)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addComponent(result)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pack();
@@ -73,19 +83,8 @@ public class Main extends javax.swing.JFrame {
             {0, 0, 0, 0, 0, 0}
         };
 
-        GraphDraw frame = new GraphDraw("Graph Draw", 500, 400);
-        frame.drawGraph(frame, graph);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setFocusable(true);
-        frame.setSize(frame.frameHeight, frame.frameWidth);
-
-        /*try {
-            Thread.sleep(10000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        frame.setVisible(true);
-
+        Board board = new Board("Test");
+        board.createGUI(graph);
     }//GEN-LAST:event_drawGraphActionPerformed
 
     /**
@@ -125,5 +124,6 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton drawGraph;
+    private javax.swing.JLabel result;
     // End of variables declaration//GEN-END:variables
 }
