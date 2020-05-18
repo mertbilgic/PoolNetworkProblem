@@ -24,7 +24,7 @@ public class Board extends JFrame {
         board.setResizable(true);//Ekranın genişleyebilir olmasını engelliyoruz
         board.setFocusable(false);//JFrame odaklanmasını engelliyoruz.
         board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        board.setSize(500, 400);
+        board.setSize(650, 400);
 
         GraphDraw frame = new GraphDraw("Graph Draw", 500, 400);
         frame.drawGraph(frame, graph);

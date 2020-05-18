@@ -60,13 +60,14 @@ public class GraphDraw extends JPanel {
 
     class edge {
 
-        int i, j, x, y;
+        int i, j, x, y, c;
 
-        public edge(int ii, int jj, int xx, int yy) {
+        public edge(int ii, int jj, int xx, int yy, int cc) {
             i = ii;
             j = jj;
             x = xx;
             y = yy;
+            c = cc;
         }
     }
 
@@ -76,21 +77,24 @@ public class GraphDraw extends JPanel {
         this.repaint();
     }
 
-    public void addEdge(int i, int j, int x, int y) {
+    public void addEdge(int i, int j, int x, int y, int cost) {
         //add an edge between nodes i and j
-        edges.add(new edge(i, j, x, y));
+        edges.add(new edge(i, j, x, y,cost));
         this.repaint();
     }
 
     public void paint(Graphics g) { // draw the nodes and edges
         FontMetrics f = g.getFontMetrics();
         int nodeHeight = Math.max(height, f.getHeight());
-
-        g.setColor(Color.black);
+        g.setFont(new Font("default", Font.BOLD, 16));
+        
         for (edge e : edges) {
+            g.setColor(Color.black);
             g.drawLine(nodes.get(e.i).x + e.x, nodes.get(e.i).y + e.y,
                     nodes.get(e.j).x + e.x, nodes.get(e.j).y + e.y);
-            //g.drawString(nodes.get(e.), ERROR, ERROR);
+            String test = String.valueOf(e.c);
+            g.setColor(Color.WHITE);
+            g.drawString(test, (nodes.get(e.i).x + nodes.get(e.j).x + 2*e.x)/2, (nodes.get(e.i).y + nodes.get(e.j).y + 2*e.y)/2);
         }
 
         for (Node n : nodes) {
@@ -135,19 +139,19 @@ public class GraphDraw extends JPanel {
                         edgeStartCordinantX = -10;
                         edgeStartCordinantY = -10;
                     }
-                    frame.addEdge(i, j, edgeStartCordinantX, edgeStartCordinantY);
+                    frame.addEdge(i, j, edgeStartCordinantX, edgeStartCordinantY,graph[i][j]);
                 }
                 edgeStartCordinantX = 0;
                 edgeStartCordinantY = 0;
             }
             if (i != 0) {
                 if (i % 2 == 0) {
-                    y = node_start_y + 75;
+                    y = node_start_y + 125;
                 } else if (graph.length - 1 != i) {
-                    y = node_start_y - 75;
-                    x += 110;
+                    y = node_start_y - 125;
+                    x += 160;
                 } else {
-                    x += 110;
+                    x += 160;
                     y = node_start_y;
                 }
             }
