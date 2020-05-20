@@ -20,7 +20,7 @@ public class Board extends JFrame {
 
     public void createGUI(int graph[][]) {
 
-        Board board = new Board("Grafik Kullanımı");
+        Board board = new Board("Graph Draw");
         board.setResizable(true);//Ekranın genişleyebilir olmasını engelliyoruz
         board.setFocusable(false);//JFrame odaklanmasını engelliyoruz.
         board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

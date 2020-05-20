@@ -15,12 +15,14 @@ import javax.swing.JFrame;
  */
 public class Main extends javax.swing.JFrame {
 
+    MatrixDraw matrix;
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,8 +33,15 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jScrollBar1 = new javax.swing.JScrollBar();
         drawGraph = new javax.swing.JButton();
         result = new javax.swing.JLabel();
+        enterMatrix = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        nodeCount = new javax.swing.JTextField();
+
+        jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +54,21 @@ public class Main extends javax.swing.JFrame {
 
         result.setText("Result:");
 
+        enterMatrix.setText("Enter The Matrix ");
+        enterMatrix.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterMatrixActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Node Count:");
+
+        nodeCount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nodeCountActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -52,19 +76,30 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(drawGraph))
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nodeCount, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(enterMatrix))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(134, Short.MAX_VALUE))
+                        .addGap(130, 130, 130)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(drawGraph)
+                            .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enterMatrix)
+                    .addComponent(jLabel1)
+                    .addComponent(nodeCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(82, 82, 82)
                 .addComponent(drawGraph)
-                .addGap(48, 48, 48)
+                .addGap(18, 18, 18)
                 .addComponent(result)
                 .addContainerGap(77, Short.MAX_VALUE))
         );
@@ -73,7 +108,7 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void drawGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawGraphActionPerformed
-
+/*
         int graph[][] = new int[][]{
             {0, 16, 13, 0, 0, 0},
             {0, 0, 10, 12, 0, 0},
@@ -82,10 +117,22 @@ public class Main extends javax.swing.JFrame {
             {0, 0, 0, 7, 0, 4},
             {0, 0, 0, 0, 0, 0}
         };
-
+*/
         Board board = new Board("Test");
-        board.createGUI(graph);
+        if(matrix.getGraph()!=null)
+            board.createGUI(matrix.getGraph());
+           
     }//GEN-LAST:event_drawGraphActionPerformed
+
+    private void enterMatrixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterMatrixActionPerformed
+        int count = Integer.parseInt(nodeCount.getText().toString());
+        matrix = new MatrixDraw(count);
+        matrix.createAndShowGui(matrix);
+    }//GEN-LAST:event_enterMatrixActionPerformed
+
+    private void nodeCountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nodeCountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nodeCountActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,6 +171,11 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton drawGraph;
+    private javax.swing.JButton enterMatrix;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JTextField nodeCount;
     private javax.swing.JLabel result;
     // End of variables declaration//GEN-END:variables
 }
