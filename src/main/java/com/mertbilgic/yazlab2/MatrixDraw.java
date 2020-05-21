@@ -19,6 +19,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 //https://stackoverflow.com/questions/36681289/displaying-jlabel-matrix
+//https://stackoverflow.com/questions/11745391/java-how-to-flash-jpanel-window
+//https://stackoverflow.com/questions/5752307/how-to-retrieve-value-from-jtextfield-in-java-swing
+//https://stackoverflow.com/questions/5064393/using-loop-to-get-values-from-jtextfields
 
 /**
  *
@@ -28,7 +31,7 @@ public class MatrixDraw extends JPanel {
 
     private static final int GAP = 1;
     private static final Font LABEL_FONT = new Font(Font.DIALOG, Font.PLAIN, 24);
-    private int graph[][];
+    private int graph[][] = null;
     private JFrame frame;
 
     int staticGraph[][] = new int[][]{

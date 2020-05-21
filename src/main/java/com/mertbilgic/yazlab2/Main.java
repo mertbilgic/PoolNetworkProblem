@@ -7,7 +7,9 @@ package com.mertbilgic.yazlab2;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,14 +17,14 @@ import javax.swing.JFrame;
  */
 public class Main extends javax.swing.JFrame {
 
-    MatrixDraw matrix;
+    MatrixDraw matrix = null;
+
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,17 +109,28 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void drawGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawGraphActionPerformed
-        
+
         Board board = new Board("Test");
-        if(matrix.getGraph()!=null)
+        if (matrix != null ) {
             board.createGUI(matrix.getGraph());
-           
+        }else{
+            String message =  "Enter The Garph";
+            board.flashMessage(message);
+        }
+
     }//GEN-LAST:event_drawGraphActionPerformed
 
     private void enterMatrixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterMatrixActionPerformed
-        int count = Integer.parseInt(nodeCount.getText().toString());
-        matrix = new MatrixDraw(count);
-        matrix.createAndShowGui(matrix);
+        String text = nodeCount.getText().toString();
+        if(!text.isEmpty()){
+            int count = Integer.parseInt(text);
+            matrix = new MatrixDraw(count);
+            matrix.createAndShowGui(matrix);
+        }else{
+            String message =  "Enter The Node Count";
+            Board.flashMessage(message);
+        }
+            
     }//GEN-LAST:event_enterMatrixActionPerformed
 
     private void nodeCountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nodeCountActionPerformed

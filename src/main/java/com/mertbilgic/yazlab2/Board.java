@@ -6,7 +6,9 @@
 package com.mertbilgic.yazlab2;
 
 import java.awt.HeadlessException;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,6 +35,12 @@ public class Board extends JFrame {
 
         board.add(frame);
         board.setVisible(true);
+
+    }
+
+    public static void flashMessage(String message) {
+
+        JOptionPane.showMessageDialog(null, message);
 
     }
 }
