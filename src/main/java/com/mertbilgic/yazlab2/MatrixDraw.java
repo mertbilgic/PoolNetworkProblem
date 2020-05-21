@@ -28,13 +28,24 @@ public class MatrixDraw extends JPanel {
 
     private static final int GAP = 1;
     private static final Font LABEL_FONT = new Font(Font.DIALOG, Font.PLAIN, 24);
-    private int graph[][] ;
+    private int graph[][];
+    private JFrame frame;
+
+    int staticGraph[][] = new int[][]{
+        {0, 16, 13, 0, 0, 0},
+        {0, 0, 10, 12, 0, 0},
+        {0, 4, 0, 0, 14, 0},
+        {0, 0, 9, 0, 0, 20},
+        {0, 0, 0, 7, 0, 4},
+        {0, 0, 0, 0, 0, 0}
+    };
+
     public MatrixDraw(int nodeCount) {
         graph = new int[nodeCount][nodeCount];
-        
+
         JTextField[][] grid = new JTextField[nodeCount][nodeCount];
         JPanel matrix = new JPanel(new GridLayout(nodeCount, nodeCount, GAP, GAP));
-        
+
         matrix.setBorder(BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP));
         matrix.setBackground(Color.BLACK);
         for (int row = 0; row < grid.length; row++) {
@@ -48,8 +59,10 @@ public class MatrixDraw extends JPanel {
             }
         }
         JButton btn = new JButton("Save");
+        JButton btn2 = new JButton("Get Static Graph");
         JPanel bottomPanel = new JPanel();
         bottomPanel.add(btn);
+        bottomPanel.add(btn2);
 
         setLayout(new BorderLayout());
         add(matrix, BorderLayout.CENTER);
@@ -59,25 +72,52 @@ public class MatrixDraw extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-               
-                for (int row = 0; row < grid.length; row++) {
-                    for (int col = 0; col < grid[row].length; col++) {
-                        graph[row][col] = Integer.parseInt(grid[row][col].getText().trim().toString());
-                        //System.out.println(""+);
-                    }
-                }
+                insertGraphData(grid);
+                frame.setVisible(false);
+            }
+        });
+
+        btn2.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                insertStaticGraph(grid, staticGraph);
             }
         });
     }
 
     public void createAndShowGui(MatrixDraw mainPanel) {
 
-        JFrame frame = new JFrame("Matrix Draw");
+        frame = new JFrame("Matrix Draw");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(mainPanel);
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
+    }
+
+    public void insertGraphData(JTextField[][] grid) {
+
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[row].length; col++) {
+                try{
+                    graph[row][col] = Integer.parseInt(grid[row][col].getText().trim().toString());
+
+                }catch(Exception ex){
+                    graph[row][col] = 0;
+                }
+            }
+        }
+
+    }
+
+    public void insertStaticGraph(JTextField[][] grid, int graph[][]) {
+        for (int row = 0; row < graph.length; row++) {
+            for (int col = 0; col < graph[row].length; col++) {
+                grid[row][col].setText(String.valueOf(graph[row][col]));
+            }
+        }
+
     }
 
     public int[][] getGraph() {
@@ -88,5 +128,4 @@ public class MatrixDraw extends JPanel {
         this.graph = graph;
     }
 
-    
 }

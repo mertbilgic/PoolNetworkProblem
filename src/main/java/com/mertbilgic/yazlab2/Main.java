@@ -52,8 +52,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        result.setText("Result:");
-
         enterMatrix.setText("Enter The Matrix ");
         enterMatrix.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,10 +81,11 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(enterMatrix))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(drawGraph)
-                            .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(162, 162, 162)
+                        .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(drawGraph)))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -101,23 +100,14 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(drawGraph)
                 .addGap(18, 18, 18)
                 .addComponent(result)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void drawGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawGraphActionPerformed
-/*
-        int graph[][] = new int[][]{
-            {0, 16, 13, 0, 0, 0},
-            {0, 0, 10, 12, 0, 0},
-            {0, 4, 0, 0, 14, 0},
-            {0, 0, 9, 0, 0, 20},
-            {0, 0, 0, 7, 0, 4},
-            {0, 0, 0, 0, 0, 0}
-        };
-*/
+        
         Board board = new Board("Test");
         if(matrix.getGraph()!=null)
             board.createGUI(matrix.getGraph());
