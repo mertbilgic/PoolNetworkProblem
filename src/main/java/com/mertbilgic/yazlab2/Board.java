@@ -9,6 +9,7 @@ import java.awt.HeadlessException;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -20,18 +21,21 @@ public class Board extends JFrame {
         super(title);
     }
 
-    public void createGUI(int graph[][]) {
+    public void createGUI(int graph[][], String sink, String source) {
 
         Board board = new Board("Graph Draw");
         board.setResizable(true);//Ekranın genişleyebilir olmasını engelliyoruz
         board.setFocusable(false);//JFrame odaklanmasını engelliyoruz.
-        board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        board.setSize(650, 400);
+        board.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        board.setSize(800, 650);
 
         GraphDraw frame = new GraphDraw("Graph Draw", 500, 400);
+        frame.sink = sink;
+        frame.source = source;
         frame.drawGraph(frame, graph);
         frame.setFocusable(true);
         frame.setSize(frame.frameHeight, frame.frameWidth);
+        //frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         board.add(frame);
         board.setVisible(true);

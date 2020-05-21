@@ -42,6 +42,10 @@ public class Main extends javax.swing.JFrame {
         enterMatrix = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         nodeCount = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        sourceText = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        sinkText = new javax.swing.JTextField();
 
         jRadioButton1.setText("jRadioButton1");
 
@@ -69,26 +73,39 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Source:");
+
+        jLabel3.setText("Sink:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nodeCount, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(enterMatrix))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
+                        .addGap(239, 239, 239)
                         .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(drawGraph)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(nodeCount, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                                .addComponent(sourceText))
+                            .addComponent(sinkText, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(enterMatrix))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(drawGraph)))))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,11 +115,22 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(enterMatrix)
                     .addComponent(jLabel1)
                     .addComponent(nodeCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82)
-                .addComponent(drawGraph)
-                .addGap(18, 18, 18)
-                .addComponent(result)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(sourceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(sinkText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(drawGraph)
+                        .addGap(64, 64, 64)
+                        .addComponent(result)))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,8 +139,10 @@ public class Main extends javax.swing.JFrame {
     private void drawGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawGraphActionPerformed
 
         Board board = new Board("Test");
+        String source = sourceText.getText().toString();
+        String sink = sinkText.getText().toString();
         if (matrix != null ) {
-            board.createGUI(matrix.getGraph());
+            board.createGUI(matrix.getGraph(), sink, source);
         }else{
             String message =  "Enter The Garph";
             board.flashMessage(message);
@@ -176,9 +206,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton drawGraph;
     private javax.swing.JButton enterMatrix;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JTextField nodeCount;
     private javax.swing.JLabel result;
+    private javax.swing.JTextField sinkText;
+    private javax.swing.JTextField sourceText;
     // End of variables declaration//GEN-END:variables
 }

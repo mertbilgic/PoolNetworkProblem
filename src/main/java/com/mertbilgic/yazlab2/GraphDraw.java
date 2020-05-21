@@ -14,6 +14,13 @@ improve upon it!
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.imageio.stream.FileImageInputStream;
 import javax.swing.*;
 
 public class GraphDraw extends JPanel {
@@ -22,7 +29,9 @@ public class GraphDraw extends JPanel {
     public int height;
     public int frameHeight;
     public int frameWidth;
-    
+    public String source;
+    public String sink;
+    BufferedImage image ;
 
     ArrayList<Node> nodes;
     ArrayList<edge> edges;
@@ -35,9 +44,14 @@ public class GraphDraw extends JPanel {
         height = 50;
     }
 
-    public GraphDraw(String name, int frameHeight, int frameWidth) { //Construct with label
+    public GraphDraw(String name, int frameHeight, int frameWidth) { try {
+        //Construct with label
         //this.setTitle(name);
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        image = ImageIO.read(new FileImageInputStream( new File("img/pool.png")));
+        } catch (IOException ex) {
+            Logger.getLogger(GraphDraw.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.frameHeight = frameHeight;
         this.frameWidth = frameWidth;
         nodes = new ArrayList<Node>();
@@ -98,8 +112,13 @@ public class GraphDraw extends JPanel {
         }
 
         for (Node n : nodes) {
+            if(source.equals(n.name))
+                g.setColor(Color.PINK);
+            else if(sink.equals(n.name))
+                g.setColor(Color.orange);
+            else
+                g.setColor(Color.WHITE);
             int nodeWidth = Math.max(width, f.stringWidth(n.name) + width / 2);
-            g.setColor(Color.white);
             g.fillOval(n.x - nodeWidth / 2, n.y - nodeHeight / 2,
                     nodeWidth, nodeHeight);
             g.setColor(Color.black);
@@ -108,7 +127,20 @@ public class GraphDraw extends JPanel {
 
             g.drawString(n.name, n.x - f.stringWidth(n.name) / 2,
                     n.y + f.getHeight() / 2);
+            if(sink.equals(n.name)){
+                int nodeCount = Integer.parseInt(n.name);
+                int k = 1;
+                if(nodeCount%2 == 1 && nodes.size()-1 != nodeCount)
+                    k = -3;
+                g.drawImage(image, n.x-135, n.y+60*k, this);
+            }
+                
+                
         }
+
+
+
+        
     }
 
     public GraphDraw CreateFrame(GraphDraw frame, String frameName, int frameHeight, int frameWidth) {
@@ -125,7 +157,7 @@ public class GraphDraw extends JPanel {
         int node_start_x = frame.frameHeight / 8;
         int node_start_y = frame.frameWidth / 2;
 
-        int x = node_start_x, y = node_start_y;
+        int x = node_start_x+120, y = node_start_y;
 
         int edgeStartCordinantX = 0, edgeStartCordinantY = 0;
 
@@ -146,19 +178,20 @@ public class GraphDraw extends JPanel {
             }
             if (i != 0) {
                 if (i % 2 == 0) {
-                    y = node_start_y + 125;
+                    y = node_start_y + 100;
                 } else if (graph.length - 1 != i) {
-                    y = node_start_y - 125;
-                    x += 160;
+                    y = node_start_y - 100;
+                    x += 140;
                 } else {
-                    x += 160;
+                    x += 140;
                     y = node_start_y;
                 }
             }
 
-            frame.addNode(String.valueOf(i), x, y);
+            frame.addNode(String.valueOf(i), x, y+120);
 
         }
     }
+    
 }
 
