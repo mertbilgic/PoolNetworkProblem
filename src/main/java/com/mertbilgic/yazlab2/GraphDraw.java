@@ -160,21 +160,24 @@ public class GraphDraw extends JPanel {
         int x = node_start_x+120, y = node_start_y;
 
         int edgeStartCordinantX = 0, edgeStartCordinantY = 0;
-
+        
+        int V = graph.length;
+        
+        boolean changeNode[][] = new boolean[V][V];
+        
         for (int i = 0; i < graph.length; i++) {
             for (int j = 0; j < graph[i].length; j++) {
                 if (graph[i][j] > 0) {
-                    if (graph[j][i] > 0 && i % 2 == 0) {
+                    if (!changeNode[j][i]) {
+                        changeNode[i][j] = true;
                         edgeStartCordinantX = 10;
-                        edgeStartCordinantY = 10;
+                        edgeStartCordinantY = 10;                      
                     } else {
                         edgeStartCordinantX = -10;
                         edgeStartCordinantY = -10;
                     }
                     frame.addEdge(i, j, edgeStartCordinantX, edgeStartCordinantY,graph[i][j]);
                 }
-                edgeStartCordinantX = 0;
-                edgeStartCordinantY = 0;
             }
             if (i != 0) {
                 if (i % 2 == 0) {

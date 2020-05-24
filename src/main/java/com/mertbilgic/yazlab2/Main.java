@@ -46,6 +46,8 @@ public class Main extends javax.swing.JFrame {
         sourceText = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         sinkText = new javax.swing.JTextField();
+        maxFlowBtn = new javax.swing.JButton();
+        minCutBtn = new javax.swing.JButton();
 
         jRadioButton1.setText("jRadioButton1");
 
@@ -77,6 +79,20 @@ public class Main extends javax.swing.JFrame {
 
         jLabel3.setText("Sink:");
 
+        maxFlowBtn.setText("MaxFlow");
+        maxFlowBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maxFlowBtnActionPerformed(evt);
+            }
+        });
+
+        minCutBtn.setText("MinCut");
+        minCutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                minCutBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,9 +100,6 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -104,8 +117,17 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(enterMatrix))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
-                                .addComponent(drawGraph)))))
-                .addContainerGap(51, Short.MAX_VALUE))
+                                .addComponent(drawGraph))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(maxFlowBtn)
+                        .addGap(110, 110, 110)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(minCutBtn))
+                            .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +137,6 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(enterMatrix)
                     .addComponent(jLabel1)
                     .addComponent(nodeCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -129,8 +150,12 @@ public class Main extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(drawGraph)
                         .addGap(64, 64, 64)
-                        .addComponent(result)))
-                .addContainerGap(111, Short.MAX_VALUE))
+                        .addComponent(result)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(minCutBtn)
+                            .addComponent(maxFlowBtn))))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pack();
@@ -141,10 +166,10 @@ public class Main extends javax.swing.JFrame {
         Board board = new Board("Test");
         String source = sourceText.getText().toString();
         String sink = sinkText.getText().toString();
-        if (matrix != null ) {
+        if (matrix != null) {
             board.createGUI(matrix.getGraph(), sink, source);
-        }else{
-            String message =  "Enter The Garph";
+        } else {
+            String message = "Enter The Garph";
             board.flashMessage(message);
         }
 
@@ -152,20 +177,46 @@ public class Main extends javax.swing.JFrame {
 
     private void enterMatrixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterMatrixActionPerformed
         String text = nodeCount.getText().toString();
-        if(!text.isEmpty()){
+        if (!text.isEmpty()) {
             int count = Integer.parseInt(text);
             matrix = new MatrixDraw(count);
             matrix.createAndShowGui(matrix);
-        }else{
-            String message =  "Enter The Node Count";
+        } else {
+            String message = "Enter The Node Count";
             Board.flashMessage(message);
         }
-            
+
     }//GEN-LAST:event_enterMatrixActionPerformed
 
     private void nodeCountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nodeCountActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nodeCountActionPerformed
+
+    private void minCutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minCutBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_minCutBtnActionPerformed
+
+    private void maxFlowBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxFlowBtnActionPerformed
+        MaxFlow max = new MaxFlow();
+
+        int source = Integer.parseInt(sourceText.getText().toString());
+        int sink = Integer.parseInt(sinkText.getText().toString());
+        int v = Integer.parseInt(nodeCount.getText().toString());
+        max.setV(v);
+
+        Result result = max.fordFulkerson(matrix.getGraph(), source, sink);
+
+        Board board = new Board("Test");
+
+        if (matrix != null) {
+            board.createGUI(result.getGraph(),String.valueOf(sink), String.valueOf(source));
+        } else {
+            String message = "Enter The Garph";
+            board.flashMessage(message);
+        }
+
+
+    }//GEN-LAST:event_maxFlowBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,6 +261,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JButton maxFlowBtn;
+    private javax.swing.JButton minCutBtn;
     private javax.swing.JTextField nodeCount;
     private javax.swing.JLabel result;
     private javax.swing.JTextField sinkText;
