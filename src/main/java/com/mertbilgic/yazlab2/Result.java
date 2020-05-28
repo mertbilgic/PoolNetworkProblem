@@ -10,15 +10,18 @@ package com.mertbilgic.yazlab2;
  * @author mertbilgic
  */
 //https://stackoverflow.com/questions/2832472/how-to-return-2-values-from-a-java-method
-class Result {
+public class Result {
     private int step;
     private int[][] graph;
-
+   
+    
     public Result(int step, int[][] graph) {
         this.step = step;
         this.graph = graph;
     }
 
+
+   
     public int getStep() {
         return step;
     }

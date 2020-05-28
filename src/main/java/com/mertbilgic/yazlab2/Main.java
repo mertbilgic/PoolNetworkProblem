@@ -18,7 +18,9 @@ import javax.swing.JOptionPane;
 public class Main extends javax.swing.JFrame {
 
     MatrixDraw matrix = null;
-
+    public int[] e1;
+    public int[] e2;
+    boolean[] visit;
     /**
      * Creates new form Main
      */
@@ -48,6 +50,8 @@ public class Main extends javax.swing.JFrame {
         sinkText = new javax.swing.JTextField();
         maxFlowBtn = new javax.swing.JButton();
         minCutBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         jRadioButton1.setText("jRadioButton1");
 
@@ -93,6 +97,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,13 +129,13 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(maxFlowBtn)
-                        .addGap(110, 110, 110)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(minCutBtn))
-                            .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(97, Short.MAX_VALUE))
+                        .addGap(76, 76, 76)
+                        .addComponent(minCutBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,10 +160,12 @@ public class Main extends javax.swing.JFrame {
                         .addGap(64, 64, 64)
                         .addComponent(result)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(minCutBtn)
-                            .addComponent(maxFlowBtn))))
-                .addContainerGap(82, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(minCutBtn)
+                                .addComponent(maxFlowBtn))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -169,7 +179,7 @@ public class Main extends javax.swing.JFrame {
         if (matrix != null) {
             board.createGUI(matrix.getGraph(), sink, source);
         } else {
-            String message = "Enter The Garph";
+            String message = "Enter The Graph";
             board.flashMessage(message);
         }
 
@@ -194,6 +204,21 @@ public class Main extends javax.swing.JFrame {
 
     private void minCutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minCutBtnActionPerformed
         // TODO add your handling code here:
+      MinCut min = new MinCut();
+      int source = Integer.parseInt(sourceText.getText().toString());
+      int sink = Integer.parseInt(sinkText.getText().toString());
+      Result2 result2 = min.minCut(matrix.getGraph(), source, sink);
+      int v = Integer.parseInt(nodeCount.getText().toString());
+      min.setV(v);
+        Board board = new Board("Test");
+
+        if (matrix != null) {
+            board.createGUI(result2.getGraph(),String.valueOf(sink), String.valueOf(source));
+        } else {
+            String message = "Enter The Graph";
+            board.flashMessage(message);
+        }
+     
     }//GEN-LAST:event_minCutBtnActionPerformed
 
     private void maxFlowBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxFlowBtnActionPerformed
@@ -211,7 +236,7 @@ public class Main extends javax.swing.JFrame {
         if (matrix != null) {
             board.createGUI(result.getGraph(),String.valueOf(sink), String.valueOf(source));
         } else {
-            String message = "Enter The Garph";
+            String message = "Enter The Graph";
             board.flashMessage(message);
         }
 
@@ -261,6 +286,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton maxFlowBtn;
     private javax.swing.JButton minCutBtn;
     private javax.swing.JTextField nodeCount;

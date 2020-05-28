@@ -32,9 +32,12 @@ public class GraphDraw extends JPanel {
     public String source;
     public String sink;
     BufferedImage image ;
-
     ArrayList<Node> nodes;
     ArrayList<edge> edges;
+    public int [] e1;
+    public int [] e2;
+    boolean[] visit;
+    public int[][] g;
 
     public GraphDraw() { //Constructor
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,8 +45,9 @@ public class GraphDraw extends JPanel {
         edges = new ArrayList<edge>();
         width = 50;
         height = 50;
+        
     }
-
+  
     public GraphDraw(String name, int frameHeight, int frameWidth) { try {
         //Construct with label
         //this.setTitle(name);
@@ -58,6 +62,7 @@ public class GraphDraw extends JPanel {
         edges = new ArrayList<edge>();
         width = 50;
         height = 50;
+       
     }
 
     class Node {
@@ -96,20 +101,44 @@ public class GraphDraw extends JPanel {
         edges.add(new edge(i, j, x, y,cost));
         this.repaint();
     }
+    
+   
 
     public void paint(Graphics g) { // draw the nodes and edges
+       
+        
         FontMetrics f = g.getFontMetrics();
         int nodeHeight = Math.max(height, f.getHeight());
         g.setFont(new Font("default", Font.BOLD, 16));
-        
         for (edge e : edges) {
             g.setColor(Color.black);
-            g.drawLine(nodes.get(e.i).x + e.x, nodes.get(e.i).y + e.y,
-                    nodes.get(e.j).x + e.x, nodes.get(e.j).y + e.y);
+            g.drawLine(nodes.get(e.i).x + e.x, nodes.get(e.i).y + e.y, nodes.get(e.j).x + e.x, nodes.get(e.j).y + e.y);
+           
             String test = String.valueOf(e.c);
             g.setColor(Color.WHITE);
             g.drawString(test, (nodes.get(e.i).x + nodes.get(e.j).x + 2*e.x)/2, (nodes.get(e.i).y + nodes.get(e.j).y + 2*e.y)/2);
+     /* for(int p=0; p< e1[p];p++){
+           for(int k=0;k< e2[k];k++){
+            if(e.i == e1[p]){
+            g.setColor(Color.red);
+            g.drawLine(nodes.get(e.i).x + e.x, nodes.get(e.i).y + e.y,
+                    nodes.get(e.j).x + e.x, nodes.get(e.j).y + e.y);
         }
+            else if(e.i == e2[k]){
+            g.setColor(Color.red);
+            g.drawLine(nodes.get(e.i).x + e.x, nodes.get(e.i).y + e.y,
+                    nodes.get(e.j).x + e.x, nodes.get(e.j).y + e.y);
+            }
+            
+           }
+           
+            } */
+           
+       
+        }
+        
+       
+        
 
         for (Node n : nodes) {
             if(source.equals(n.name))
@@ -142,6 +171,7 @@ public class GraphDraw extends JPanel {
 
         
     }
+   
 
     public GraphDraw CreateFrame(GraphDraw frame, String frameName, int frameHeight, int frameWidth) {
         frame = new GraphDraw(frameName, frameHeight, frameWidth);
@@ -194,7 +224,9 @@ public class GraphDraw extends JPanel {
             frame.addNode(String.valueOf(i), x, y+120);
 
         }
+        
+         
     }
-    
+   
 }
 
