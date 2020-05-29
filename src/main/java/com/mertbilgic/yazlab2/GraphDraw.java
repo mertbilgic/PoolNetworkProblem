@@ -11,6 +11,8 @@ reasonably nice graphs/trees/diagrams. Feel free to
 improve upon it!
  */
 //http://www1.cs.columbia.edu/~bert/courses/3137/hw3_files/GraphDraw.java
+//https://stackoverflow.com/questions/29585353/paint-with-swing-java
+//https://stackoverflow.com/questions/44269435/java-how-and-when-exactly-is-the-paint-method-called
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -31,6 +33,7 @@ public class GraphDraw extends JPanel {
     public int frameWidth;
     public String source;
     public String sink;
+    public String message;
     BufferedImage image ;
 
     ArrayList<Node> nodes;
@@ -44,7 +47,7 @@ public class GraphDraw extends JPanel {
         height = 50;
     }
 
-    public GraphDraw(String name, int frameHeight, int frameWidth) { try {
+    public GraphDraw(String name, int frameHeight, int frameWidth,String message) { try {
         //Construct with label
         //this.setTitle(name);
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,6 +57,7 @@ public class GraphDraw extends JPanel {
         }
         this.frameHeight = frameHeight;
         this.frameWidth = frameWidth;
+        this.message = message;
         nodes = new ArrayList<Node>();
         edges = new ArrayList<edge>();
         width = 50;
@@ -133,6 +137,7 @@ public class GraphDraw extends JPanel {
                 if(nodeCount%2 == 1 && nodes.size()-1 != nodeCount)
                     k = -3;
                 g.drawImage(image, n.x-135, n.y+60*k, this);
+                g.drawString(message, 50, 50);
             }
                 
                 
@@ -144,7 +149,7 @@ public class GraphDraw extends JPanel {
     }
 
     public GraphDraw CreateFrame(GraphDraw frame, String frameName, int frameHeight, int frameWidth) {
-        frame = new GraphDraw(frameName, frameHeight, frameWidth);
+        frame = new GraphDraw(frameName, frameHeight, frameWidth,"");
         frame.setSize(frameHeight, frameWidth);
         frame.setVisible(true);
         

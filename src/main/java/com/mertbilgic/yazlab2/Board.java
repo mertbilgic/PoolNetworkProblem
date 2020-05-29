@@ -15,13 +15,14 @@ import javax.swing.JPanel;
  *
  * @author mertbilgic
  */
+//https://www.javatpoint.com/java-joptionpane
 public class Board extends JFrame {
 
     public Board(String title) throws HeadlessException {
         super(title);
     }
 
-    public void createGUI(int graph[][], String sink, String source) {
+    public void createGUI(int graph[][], String sink, String source,String message) {
 
         Board board = new Board("Graph Draw");
         board.setResizable(true);//Ekranın genişleyebilir olmasını engelliyoruz
@@ -29,7 +30,7 @@ public class Board extends JFrame {
         board.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         board.setSize(800, 650);
 
-        GraphDraw frame = new GraphDraw("Graph Draw", 500, 400);
+        GraphDraw frame = new GraphDraw("Graph Draw", 500, 400,message);
         frame.sink = sink;
         frame.source = source;
         frame.drawGraph(frame, graph);

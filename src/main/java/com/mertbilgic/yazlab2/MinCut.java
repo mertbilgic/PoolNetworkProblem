@@ -5,6 +5,7 @@
  */
 package com.mertbilgic.yazlab2;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -16,8 +17,7 @@ import java.util.Queue;
 //https://www.hackerearth.com/practice/algorithms/graphs/min-cut/tutorial/
 //http://www.mathcs.emory.edu/~cheung/Courses/323/Syllabus/NetFlow/max-flow-min-cut.html
 public class MinCut {
-
-    int counter = 0;
+    String message = "Deleted edges:\n";
 
     // Java program for finding min-cut in the given graph 
     // Returns true if there is a path 
@@ -112,18 +112,23 @@ public class MinCut {
         boolean[] isVisited = new boolean[graph.length];
         dfs(rGraph, s, isVisited);
 
+
+        int r_graph[][] = new int[graph.length][graph.length];
+        for(int i=0; i<graph.length; i++)
+          for(int j=0; j<graph[i].length; j++)
+            r_graph[i][j]=graph[i][j];
         // Print all edges that are from a reachable vertex to 
         // non-reachable vertex in the original graph	 
         for (int i = 0; i < graph.length; i++) {
             for (int j = 0; j < graph.length; j++) {
                 if (graph[i][j] > 0 && isVisited[i] && !isVisited[j]) {
-                    graph[i][j] = 0;
-                    counter++;
+                    r_graph[i][j] = 0;
+                    message  +="              "+i+" -> "+j;
                 }
             }
         }
 
-        return new Result(counter, graph);
+        return new Result(message, r_graph);
 
     }
 }

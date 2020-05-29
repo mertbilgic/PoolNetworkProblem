@@ -167,7 +167,7 @@ public class Main extends javax.swing.JFrame {
         String source = sourceText.getText().toString();
         String sink = sinkText.getText().toString();
         if (matrix != null) {
-            board.createGUI(matrix.getGraph(), sink, source);
+            board.createGUI(matrix.getGraph(), sink, source,"");
         } else {
             String message = "Enter The Garph";
             board.flashMessage(message);
@@ -202,9 +202,8 @@ public class Main extends javax.swing.JFrame {
         Result result = min.minCut(matrix.getGraph(), source, sink);
 
         Board board = new Board("Test");
-
         if (matrix != null) {
-            board.createGUI(result.getGraph(), String.valueOf(sink), String.valueOf(source));
+            board.createGUI(result.getGraph(), String.valueOf(sink), String.valueOf(source),result.getMessage());
         } else {
             String message = "Enter The Garph";
             board.flashMessage(message);
@@ -222,11 +221,11 @@ public class Main extends javax.swing.JFrame {
         Result result = max.fordFulkerson(matrix.getGraph(), source, sink);
 
         Board board = new Board("Test");
-
+        String message = "The maximum possible flow is "+result.getStep();
         if (matrix != null) {
-            board.createGUI(result.getGraph(), String.valueOf(sink), String.valueOf(source));
+            board.createGUI(result.getGraph(), String.valueOf(sink), String.valueOf(source),message);
         } else {
-            String message = "Enter The Garph";
+            message = "Enter The Garph";
             board.flashMessage(message);
         }
 
