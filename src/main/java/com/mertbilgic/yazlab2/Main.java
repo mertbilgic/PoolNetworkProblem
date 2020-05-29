@@ -193,7 +193,22 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_nodeCountActionPerformed
 
     private void minCutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minCutBtnActionPerformed
-        // TODO add your handling code here:
+        MinCut min = new MinCut();
+
+        int source = Integer.parseInt(sourceText.getText().toString());
+        int sink = Integer.parseInt(sinkText.getText().toString());
+        int v = Integer.parseInt(nodeCount.getText().toString());
+
+        Result result = min.minCut(matrix.getGraph(), source, sink);
+
+        Board board = new Board("Test");
+
+        if (matrix != null) {
+            board.createGUI(result.getGraph(), String.valueOf(sink), String.valueOf(source));
+        } else {
+            String message = "Enter The Garph";
+            board.flashMessage(message);
+        }
     }//GEN-LAST:event_minCutBtnActionPerformed
 
     private void maxFlowBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxFlowBtnActionPerformed
@@ -209,7 +224,7 @@ public class Main extends javax.swing.JFrame {
         Board board = new Board("Test");
 
         if (matrix != null) {
-            board.createGUI(result.getGraph(),String.valueOf(sink), String.valueOf(source));
+            board.createGUI(result.getGraph(), String.valueOf(sink), String.valueOf(source));
         } else {
             String message = "Enter The Garph";
             board.flashMessage(message);

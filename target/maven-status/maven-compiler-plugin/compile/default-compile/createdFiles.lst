@@ -1,5 +1,6 @@
 com/mertbilgic/yazlab2/GraphDraw$Node.class
 com/mertbilgic/yazlab2/Board.class
+com/mertbilgic/yazlab2/MinCut.class
 com/mertbilgic/yazlab2/MaxFlow.class
 com/mertbilgic/yazlab2/MatrixDraw.class
 com/mertbilgic/yazlab2/Main$3.class
