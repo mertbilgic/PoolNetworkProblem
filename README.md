@@ -14,7 +14,7 @@ A düğümünden F düğüme (daha fazla ya da az miktarda düğüm olabilir de�
 
 #### Kullanım:
 
-Test için hazırlanmış adımları takip ederek bir önrek gerçekleştirelim.
+Test için hazırlanmış adımları takip ederek bir örnek gerçekleştirelim.
 
 1. Node Count değerini 6 olarak giriniz.
 2. Enter The Matrix butonunu tıkladıktan sonra Get Static Graph butonu ile test grafını matrise aktatırınız.
